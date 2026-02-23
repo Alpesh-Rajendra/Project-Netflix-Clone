@@ -171,7 +171,7 @@ pipeline {
     agent any
     tools {
         jdk 'jdk17'
-        nodejs 'node16'
+        nodejs 'node18'
     }
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
@@ -212,20 +212,20 @@ pipeline {
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker'){   
-                       sh "docker build --build-arg TMDB_V3_API_KEY=020581a34f3ab93b1360a55bea864bd9 -t abhipraydh96/moviesite ."
-                       sh "docker push abhipraydh96/moviesite "
+                       sh "docker build --build-arg TMDB_V3_API_KEY=eb3428e4a33e89ba1946e24fcb6cfede -t bhushan17mal/oncdecb1 ."
+                       sh "docker push bhushan17mal/oncdecb1 "
                     }
                 }
             }
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image abhipraydh96/moviesite > trivyimage.txt" 
+                sh "trivy image bhushan17mal/oncdecb1 > trivyimage.txt" 
             }
         }
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d --name netflix -p 8081:80 abhipraydh96/moviesite'
+                sh 'docker run -d --name netflix -p 8081:80 bhushan17mal/oncdecb1'
             }
         }
         
