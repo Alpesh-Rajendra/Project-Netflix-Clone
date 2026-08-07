@@ -180,7 +180,7 @@ pipeline {
     stages {
         stage('code-pull'){
             steps{
-                git branch: 'main', url: 'https://github.com/abhipraydhoble/Project-Netflix-Clone.git'
+                git branch: 'main', url: 'https://github.com/Alpesh-Rajendra/Project-Netflix-Clone.git'
             }
         }
         
@@ -210,18 +210,18 @@ pipeline {
        	       withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
             	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
                 sh "docker build --build-arg TMDB_V3_API_KEY=eb3428e4a33e89ba1946e24fcb6cfede -t abhipraydh96/netflix ."
-                sh "docker push abhipraydh96/netflix "
+                sh "docker push kaali28/netflix "
                }
             }
         } 
         stage("TRIVY"){
             steps{
-                sh "trivy image abhipraydh96/netflix > trivyimage.txt" 
+                sh "trivy image kaali28/netflix > trivyimage.txt" 
             }
         }
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d --name netflix -p 8081:80 abhipraydh96/netflix'
+                sh 'docker run -d --name netflix -p 8081:80 kaali28/netflix'
             }
         }
     }
