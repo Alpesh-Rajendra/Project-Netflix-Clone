@@ -205,11 +205,11 @@ pipeline {
             }
         }
 
-        stage('code-deploy'){
+        stage('code-build'){
             steps {
        	       withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
             	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                sh "docker build --build-arg TMDB_V3_API_KEY=eb3428e4a33e89ba1946e24fcb6cfede -t abhipraydh96/netflix ."
+                sh "docker build --build-arg TMDB_V3_API_KEY=eb3428e4a33e89ba1946e24fcb6cfede -t kaali28/netflix ."
                 sh "docker push kaali28/netflix "
                }
             }
