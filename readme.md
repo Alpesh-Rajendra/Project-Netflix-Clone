@@ -209,7 +209,7 @@ pipeline {
             steps {
        	       withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
             	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                sh "docker build --build-arg TMDB_V3_API_KEY=eb3428e4a33e89ba1946e24fcb6cfede -t kaali28/netflix ."
+                sh "docker build --build-arg TMDB_V3_API_KEY=61cd6e1085f37f2833c6dd4ababb2a5b -t kaali28/netflix ."
                 sh "docker push kaali28/netflix "
                }
             }
